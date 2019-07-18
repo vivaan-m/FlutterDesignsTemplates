@@ -1,19 +1,16 @@
+import 'package:designs_templates/AnimatedPageRoute/SlideLeftRoute.dart';
 import 'package:flutter/material.dart';
 
-import 'HomePageDesigns/Designs/AdvanceHomeUI.dart';
 import 'HomePageDesigns/HomePageChooser.dart';
-import 'package:designs_templates/AnimatedPageRoute/SlideLeftRoute.dart';
 import 'LoginPageDesigns/LoginPageChooser.dart';
-import 'New_Items/FaceBookSliderItem.dart';
 import 'New_Items/FacebookOnlySlider.dart';
-import 'New_Items/ServiceItems.dart';
 import 'ProfilePageDesigns/ProfilePageChooser.dart';
 import 'SettingPageDesigns/SettingPageChooser.dart';
 
 void main() => runApp(MaterialApp(
     title: "Design Templates",
     debugShowCheckedModeBanner: false,
-    home: AdvanceHomeUI()));
+    home: MainScreen()));
 
 class MainScreen extends StatelessWidget {
   List<String> templateNames = [
@@ -43,7 +40,7 @@ class MainScreen extends StatelessWidget {
         body: ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: 4,
-            itemBuilder: (context, index) => FacebookOnlySlider()));
+            itemBuilder: (context, index) => BounceAnimation(index)));
   }
 
   Widget _itemMainScreen(int index, BuildContext context) {

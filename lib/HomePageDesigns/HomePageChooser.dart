@@ -7,6 +7,7 @@ import 'package:designs_templates/AnimatedPageRoute/ScalePageRoute.dart';
 import 'package:designs_templates/AnimatedPageRoute/SizePageRoute.dart';
 import 'package:designs_templates/AnimatedPageRoute/SlideLeftRoute.dart';
 import 'package:designs_templates/AnimatedPageRoute/SlideRightRoute.dart';
+import 'Designs/AdvanceHomeUI.dart';
 import 'Designs/BeginnerHomeDesign.dart';
 import 'Designs/IntermediateHomeDesign.dart';
 
@@ -87,6 +88,11 @@ class HomePageChooser extends StatelessWidget {
             enabled: true,
           ),
           ListTile(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  SlideLeftRoute(page:AdvanceHomeUI()));
+            },
             title: Text(
               "Advance Design",
               style: TextStyle(color: Colors.white),
