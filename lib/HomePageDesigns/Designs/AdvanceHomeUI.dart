@@ -1,4 +1,8 @@
+import 'package:designs_templates/AnimatedPageRoute/SlideRightRoute.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:swipedetector/swipedetector.dart';
+import 'package:toast/toast.dart';
 import 'dart:math' as math;
 
 class AdvanceHomeUI extends StatefulWidget {
@@ -13,7 +17,7 @@ class _AdvanceHomeUIState extends State<AdvanceHomeUI> {
   @override
   void initState() {
     super.initState();
-    controller = PageController(viewportFraction: 0.9);
+    controller = PageController();
     controller.addListener(() {
       setState(() {
         pageOffset = controller.page;
@@ -29,77 +33,119 @@ class _AdvanceHomeUIState extends State<AdvanceHomeUI> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueGrey,
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(30),
-                bottomLeft: Radius.circular(30))),
-        elevation: 8,
-        title: Text(
-          "Home",
-          style: TextStyle(
-              fontFamily: "Sch",
+    return SwipeDetector(
+      swipeConfiguration: SwipeConfiguration(
+          verticalSwipeMinDisplacement: 1, verticalSwipeMinVelocity: 2),
+      onSwipeUp: () {
+        if (controller.page == 0) {
+          Navigator.push(
+              context, SlideUPFromDownRoute(page: JustAScreen("Login")));
+        } else if (controller.page == 1) {
+          Navigator.push(
+              context, SlideUPFromDownRoute(page: JustAScreen("SignUp")));
+        } else if (controller.page == 2) {
+          Navigator.push(
+              context, SlideUPFromDownRoute(page: JustAScreen("AboutUs")));
+        } else if (controller.page == 3.0000000000000004) {
+          Navigator.push(
+              context, SlideUPFromDownRoute(page: JustAScreen("Settings")));
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.blueGrey,
+        appBar: AppBar(
+          leading: InkWell(
+            child: Icon(
+              Icons.arrow_back,
               color: Colors.blueGrey,
-              fontWeight: FontWeight.bold,
-              fontSize: 30),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30),
+                  bottomLeft: Radius.circular(30))),
+          elevation: 8,
+          title: Text(
+            "Home",
+            style: TextStyle(
+                fontFamily: "Sch",
+                color: Colors.blueGrey,
+                fontWeight: FontWeight.bold,
+                fontSize: 30),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
-      body: PageView(
-        physics: BouncingScrollPhysics(),
-        controller: controller,
-        children: <Widget>[
-          InkWell(
-            onTap: () {
-              print("Login");
-            },
-            child: SlidingCard(
-              assetName:
-                  "Assets/Login.png",
-              name: "Login",
-              key: Key("Login"),
-              offset: pageOffset,
-            ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 500,
+                child: PageView(
+                  physics: BouncingScrollPhysics(),
+                  controller: controller,
+                  children: <Widget>[
+                    SlidingCard(
+                      assetName: "Assets/Login.png",
+                      name: "Login",
+                      key: Key("Login"),
+                      offset: pageOffset,
+                    ),
+                    SlidingCard(
+                      assetName: "Assets/SignUp.jpg",
+                      name: "Sign Up",
+                      key: Key("SignUp"),
+                      offset: pageOffset - 1,
+                    ),
+                    SlidingCard(
+                      assetName: "Assets/Aboutus.png",
+                      name: "About US",
+                      key: Key("about"),
+                      offset: pageOffset - 2,
+                    ),
+                    SlidingCard(
+                      assetName: "Assets/setting.gif",
+                      name: "Settings",
+                      key: Key("Settings"),
+                      offset: pageOffset,
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Card(
+                      shape: CircleBorder(),
+                      child: Center(
+                          child: Icon(
+                        Icons.keyboard_arrow_up,
+                        color: Colors.blueGrey,
+                        size: 30,
+                      )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Swipe Up To Open Above Mentioned Option",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "right",
+                          fontSize: 17),
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
-          InkWell(
-            onTap: () {
-              print("Signup");
-            },
-            child: SlidingCard(
-              assetName:
-                  "Assets/SignUp.jpg",
-              name: "Sign Up",
-              key: Key("SignUp"),
-              offset: pageOffset - 1,
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              print("About Us");
-            },
-            child: SlidingCard(
-              assetName:
-                  "Assets/Aboutus.png",
-              name: "About US",
-              key: Key("about"),
-              offset: pageOffset - 2,
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              print("Settings");
-            },
-            child: SlidingCard(
-              assetName:"Assets/setting.gif",
-              name: "Settings",
-              key: Key("Settings"),
-              offset: pageOffset - 3,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -119,42 +165,19 @@ class SlidingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+
     double gauss = math.exp(-(math.pow((offset.abs() - 0.5), 2) /
         0.08)); //<--caluclate Gaussian function
 
     return Transform.translate(
-      offset: Offset(-32 * gauss * offset.sign, 0),
-      //<-- Translate the cards to make space between them
-      child: Card(
-        margin: EdgeInsets.only(left: 0, right: 12, bottom: 30, top: 12),
-        elevation: 8,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-        //<--custom shape
-        child: Column(
-          children: <Widget>[
-            ClipRRect(
-              //<--clipping image
-              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-              child: Image.asset(
-                //<-- main image
-                '$assetName',
-                alignment: Alignment(-offset.abs(), 0),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.4,
-                fit: BoxFit.none,
-              ),
-            ),
-            SizedBox(height: 8),
-            Expanded(
-              child: CardContent(
-                name: name,
-                offset: gauss,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+        offset: Offset(-160 * gauss * offset.sign, 0),
+        //<-- Translate the cards to make space between them
+        child: SlideUpAnimation(
+          name: name,
+          assetName: assetName,
+          offset: offset,
+        ));
   }
 }
 
@@ -178,7 +201,7 @@ class CardContent extends StatelessWidget {
           Spacer(),
           Center(
               child: Transform.translate(
-            offset: Offset(34 * offset, 0),
+            offset: Offset(00, 0),
             child: Text(name,
                 style: TextStyle(
                     fontSize: 50,
@@ -191,5 +214,133 @@ class CardContent extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class SlideUpAnimation extends StatefulWidget {
+  final String name;
+  final String assetName;
+  final double offset;
+
+  const SlideUpAnimation({
+    Key key,
+    this.name,
+    this.assetName,
+    this.offset,
+  }) : super(key: key);
+
+  @override
+  _SlideUpAnimationState createState() => _SlideUpAnimationState(
+        name,
+        assetName,
+        offset,
+      );
+}
+
+class _SlideUpAnimationState extends State<SlideUpAnimation>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<Offset> animation;
+  CurvedAnimation curvedAnimation;
+  final String name;
+  final String assetName;
+  final double offset;
+
+  _SlideUpAnimationState(
+    this.name,
+    this.assetName,
+    this.offset,
+  );
+
+  @override
+  void initState() {
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
+    curvedAnimation =
+        CurvedAnimation(parent: controller, curve: Curves.elasticOut);
+    animation = Tween(begin: Offset(0, 900), end: Offset(00, 00))
+        .animate(curvedAnimation)
+          ..addListener(() {
+            setState(() {});
+          });
+    controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      offset: animation.value,
+      child: Card(
+        margin: EdgeInsets.only(left: 12, right: 12, bottom: 70, top: 12),
+        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        //<--custom shape
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+              //<--clipping image
+              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+              child: Image.asset(
+                //<-- main image
+                '$assetName',
+                alignment: Alignment(-offset.abs(), 0),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.4,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            SizedBox(height: 8),
+            Expanded(
+              child: CardContent(
+                name: name,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class JustAScreen extends StatelessWidget {
+  String name;
+
+  JustAScreen(this.name);
+
+  @override
+  Widget build(BuildContext context) {
+    return SwipeDetector(
+        swipeConfiguration: SwipeConfiguration(
+            verticalSwipeMinDisplacement: 1, verticalSwipeMinVelocity: 2),
+        onSwipeDown: () {
+          Navigator.pop(context);
+        },
+        child: Scaffold(
+          backgroundColor: Colors.blueGrey,
+          body: Center(
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                "$name\n\n\nSwipe Down To Go Back",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 30, fontFamily: "Sch", color: Colors.white),
+              ),
+              SizedBox(
+                  width: 60,
+                  height: 50,
+                  child: Card(
+                    shape: CircleBorder(),
+                    elevation: 3,
+                    child: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.blueGrey,
+                      size: 30,
+                    ),
+                  ))
+            ],
+          )),
+        ));
   }
 }

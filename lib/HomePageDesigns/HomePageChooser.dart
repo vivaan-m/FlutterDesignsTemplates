@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-
-import 'package:designs_templates/HomePageDesigns/Designs/SimpleHomeDesign.dart';
-
-import 'package:designs_templates/AnimatedPageRoute/RoationPageRoute.dart';
-import 'package:designs_templates/AnimatedPageRoute/ScalePageRoute.dart';
-import 'package:designs_templates/AnimatedPageRoute/SizePageRoute.dart';
 import 'package:designs_templates/AnimatedPageRoute/SlideLeftRoute.dart';
-import 'package:designs_templates/AnimatedPageRoute/SlideRightRoute.dart';
+import 'package:designs_templates/HomePageDesigns/Designs/SimpleHomeDesign.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+
 import 'Designs/AdvanceHomeUI.dart';
 import 'Designs/BeginnerHomeDesign.dart';
 import 'Designs/IntermediateHomeDesign.dart';
@@ -14,6 +10,7 @@ import 'Designs/IntermediateHomeDesign.dart';
 class HomePageChooser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -42,8 +39,7 @@ class HomePageChooser extends StatelessWidget {
         children: <Widget>[
           ListTile(
             onTap: () {
-              Navigator.push(context,
-                  SlideLeftRoute(page:SimpleHomeDesign()));
+              Navigator.push(context, SlideLeftRoute(page: SimpleHomeDesign()));
             },
             title: Text(
               "Simple Design",
@@ -58,8 +54,7 @@ class HomePageChooser extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.push(
-                  context,
-                  SlideLeftRoute(page:BeginnerHomeDesign()));
+                  context, SlideLeftRoute(page: BeginnerHomeDesign()));
             },
             title: Text(
               "Beginner Design",
@@ -74,8 +69,7 @@ class HomePageChooser extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.push(
-                  context,
-                  SlideLeftRoute(page:IntermediateHomeDesign()));
+                  context, SlideLeftRoute(page: IntermediateHomeDesign()));
             },
             title: Text(
               "Intermediate Design",
@@ -89,9 +83,7 @@ class HomePageChooser extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Navigator.push(
-                  context,
-                  SlideLeftRoute(page:AdvanceHomeUI()));
+              Navigator.push(context, SlideLeftRoute(page: AdvanceHomeUI()));
             },
             title: Text(
               "Advance Design",

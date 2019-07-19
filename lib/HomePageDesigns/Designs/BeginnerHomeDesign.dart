@@ -4,77 +4,61 @@ class BeginnerHomeDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        elevation: 10,
-        centerTitle: true,
-        title: Text("Home"),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
-                topLeft: Radius.circular(00),
-                topRight: Radius.circular(00))),
-      ),*/
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+      body: Material(
         child: Container(
           decoration: BoxDecoration(
-              gradient:
-                  LinearGradient(colors: [Colors.lightBlueAccent, Colors.blueAccent])),
+              gradient: LinearGradient(
+                  colors: [Colors.lightBlueAccent, Colors.blueAccent])),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: PageScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(
                   height: 60,
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    InkWell(
-                      borderRadius: BorderRadius.circular(40),
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
-                      ),
+                InkWell(
+                  borderRadius: BorderRadius.circular(40),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
                     ),
-                    Text(
-                      "Home",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    "Home",
+                    style: TextStyle(color: Colors.white, fontSize: 30,fontFamily: "right "),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 SizedBox(
                   height: 50,
                 ),
                 SizedBox(
                     height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
                     child: Card(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(30),
-                              topLeft: Radius.circular(30))),
-                      elevation: 7,
-                      borderOnForeground: false,
-                      color: Colors.white,
-                      child: GridView.builder(
-                          physics: BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 4,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemBuilder: (context, index) => _itemHome(index)),
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(30))),
+                      elevation: 2,
+                      child: Column(
+                        children: <Widget>[
+                          GridView.builder(
+                              physics: BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemBuilder: (context, index) => _itemHome(index)),
+                        ],
+                      ),
                     ))
               ],
             ),

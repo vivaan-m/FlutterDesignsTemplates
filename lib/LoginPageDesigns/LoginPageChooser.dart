@@ -1,6 +1,10 @@
+import 'package:designs_templates/AnimatedPageRoute/SlideLeftRoute.dart';
+import 'package:designs_templates/AnimatedPageRoute/SlideRightRoute.dart';
 import 'package:flutter/material.dart';
 
-import 'SimpleLoginDesign.dart';
+import 'package:designs_templates/LoginPageDesigns/Designs/SimpleLoginDesign.dart';
+
+import 'Designs/BeginnerLoginUi.dart';
 
 class LoginPageChooser extends StatelessWidget {
   @override
@@ -12,7 +16,10 @@ class LoginPageChooser extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back,color: Colors.black,)),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
         title: Text(
           "Choose Login Design",
           style: TextStyle(color: Colors.black),
@@ -30,38 +37,40 @@ class LoginPageChooser extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SimpleLoginDesign()));
+                  context, SlideLeftRoute(page: SimpleLoginDesign()));
             },
             title: Text(
               "Simple Login Design",
               style: TextStyle(color: Colors.white),
             ),
             subtitle: Text(
-              "Easy",
+              "Hardness Level: Easy",
+              style: TextStyle(color: Colors.white),
+            ),
+            enabled: true,
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                  context, SlideLeftRoute(page: BeginnerLoginUI()));
+            },
+            title: Text(
+              "Beginner Login Design",
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Text(
+              "Hardness Level: Easy",
               style: TextStyle(color: Colors.white),
             ),
             enabled: true,
           ),
           ListTile(
             title: Text(
-              "Good Login Design",
+              "Intermediate Login Design",
               style: TextStyle(color: Colors.white),
             ),
             subtitle: Text(
-              "Easy",
-              style: TextStyle(color: Colors.white),
-            ),
-            enabled: true,
-          ),
-          ListTile(
-            title: Text(
-              "Better Login Design",
-              style: TextStyle(color: Colors.white),
-            ),
-            subtitle: Text(
-              "Easy",
+              "Hardness Level: Medium",
               style: TextStyle(color: Colors.white),
             ),
             enabled: true,
@@ -72,7 +81,7 @@ class LoginPageChooser extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             subtitle: Text(
-              "Easy",
+              "Hardness Level: Hard",
               style: TextStyle(color: Colors.white),
             ),
             enabled: true,

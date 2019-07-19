@@ -1,5 +1,6 @@
 import 'package:designs_templates/AnimatedPageRoute/SlideLeftRoute.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 import 'HomePageDesigns/HomePageChooser.dart';
 import 'LoginPageDesigns/LoginPageChooser.dart';
@@ -15,8 +16,8 @@ void main() => runApp(MaterialApp(
 class MainScreen extends StatelessWidget {
   List<String> templateNames = [
     "Home Designs",
-    "Profile Designs",
     "Login Designs",
+    "Profile Designs",
     "Setting Designs"
   ];
 
@@ -107,9 +108,9 @@ class MainScreen extends StatelessWidget {
   IconData _Icons(int index) {
     if (index == 0) {
       return Icons.home;
-    } else if (index == 1) {
-      return Icons.account_circle;
     } else if (index == 2) {
+      return Icons.account_circle;
+    } else if (index == 1) {
       return Icons.lock;
     } else if (index == 3) {
       return Icons.settings;
@@ -119,9 +120,9 @@ class MainScreen extends StatelessWidget {
   _onclick(index) {
     if (index == 0) {
       return HomePageChooser();
-    } else if (index == 1) {
-      return ProfilePageChooser();
     } else if (index == 2) {
+      return ProfilePageChooser();
+    } else if (index == 1) {
       return LoginPageChooser();
     } else if (index == 3) {
       return SettingPageChooser();
