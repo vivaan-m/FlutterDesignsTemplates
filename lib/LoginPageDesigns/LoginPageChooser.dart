@@ -1,5 +1,6 @@
 import 'package:designs_templates/AnimatedPageRoute/SlideLeftRoute.dart';
 import 'package:designs_templates/AnimatedPageRoute/SlideRightRoute.dart';
+import 'package:designs_templates/LoginPageDesigns/Designs/IntermediateLoginUI.dart';
 import 'package:flutter/material.dart';
 
 import 'package:designs_templates/LoginPageDesigns/Designs/SimpleLoginDesign.dart';
@@ -65,6 +66,9 @@ class LoginPageChooser extends StatelessWidget {
             enabled: true,
           ),
           ListTile(
+            onTap: (){
+             Navigator.push(context, SlideLeftRoute(page: IntermediateHomeUI()));
+            },
             title: Text(
               "Intermediate Login Design",
               style: TextStyle(color: Colors.white),

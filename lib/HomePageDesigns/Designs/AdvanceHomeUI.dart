@@ -46,18 +46,18 @@ class _AdvanceHomeUIState extends State<AdvanceHomeUI> {
         } else if (controller.page == 2) {
           Navigator.push(
               context, SlideUPFromDownRoute(page: JustAScreen("AboutUs")));
-        } else if (controller.page == 3.0000000000000004) {
+        } else if (controller.page >= 2.6) {
           Navigator.push(
               context, SlideUPFromDownRoute(page: JustAScreen("Settings")));
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.lightBlue,
         appBar: AppBar(
           leading: InkWell(
             child: Icon(
               Icons.arrow_back,
-              color: Colors.blueGrey,
+              color: Colors.lightBlue,
             ),
             onTap: () {
               Navigator.pop(context);
@@ -72,18 +72,20 @@ class _AdvanceHomeUIState extends State<AdvanceHomeUI> {
             "Home",
             style: TextStyle(
                 fontFamily: "Sch",
-                color: Colors.blueGrey,
+                color: Colors.lightBlue,
                 fontWeight: FontWeight.bold,
                 fontSize: 30),
           ),
           centerTitle: true,
           backgroundColor: Colors.white,
         ),
-        body: SingleChildScrollView(
+        body: Container(
+          decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.blueAccent,Colors.lightBlueAccent])),
           child: Column(
             children: <Widget>[
+
               SizedBox(
-                height: 500,
+                height: 530,
                 child: PageView(
                   physics: BouncingScrollPhysics(),
                   controller: controller,
@@ -115,6 +117,7 @@ class _AdvanceHomeUIState extends State<AdvanceHomeUI> {
                   ],
                 ),
               ),
+              Spacer(),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -131,18 +134,16 @@ class _AdvanceHomeUIState extends State<AdvanceHomeUI> {
                       )),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Swipe Up To Open Above Mentioned Option",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "right",
-                          fontSize: 17),
-                    ),
+                  Text(
+                    "Swipe Up To Open Above Mentioned Option",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "right",
+                        fontSize: 16),
                   ),
                 ],
-              )
+              ),
+              Spacer()
             ],
           ),
         ),
