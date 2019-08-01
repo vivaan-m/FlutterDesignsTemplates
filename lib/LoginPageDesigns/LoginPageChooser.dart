@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:designs_templates/LoginPageDesigns/Designs/SimpleLoginDesign.dart';
 
+import 'Designs/AdvanceLoginUI.dart';
 import 'Designs/BeginnerLoginUi.dart';
 
 class LoginPageChooser extends StatelessWidget {
@@ -80,6 +81,9 @@ class LoginPageChooser extends StatelessWidget {
             enabled: true,
           ),
           ListTile(
+            onTap: (){
+              Navigator.push(context, SlideLeftRoute(page: AdvanceLoginUI()));
+            },
             title: Text(
               "Advance Login Design",
               style: TextStyle(color: Colors.white),
